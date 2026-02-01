@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>HBD 🎂</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;500&family=Dancing+Script:wght@700&display=swap');
+
+*{box-sizing:border-box}
+
+html,body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    font-family:'Kanit',sans-serif;
+    background:radial-gradient(circle at top,#fff5f8,#ffe3ea);
+    color:#ff4d6d;
+}
+
+/* ---------- PAGE ---------- */
+.page{
+    width:100vw;
+    height:100vh;
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+    animation:fadeIn .9s ease;
+}
+.page.active{display:flex}
+
+@keyframes fadeIn{
+    from{opacity:0;transform:translateY(30px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+/* ---------- BUTTON ปกติ ---------- */
+.btn-next{
+    margin-top:30px;
+    padding:14px 38px;
+    background:linear-gradient(135deg,#ff758f,#ff4d6d);
+    color:#fff;
+    border:none;
+    border-radius:30px;
+    font-size:1.1rem;
+    box-shadow:0 10px 25px rgba(255,77,109,.45);
+}
+.btn-next:active{transform:scale(.95)}
+
+/* ---------- BUTTON พิเศษ Click to read ---------- */
+.btn-special{
+    margin-top:32px;
+    padding:16px 44px;
+    font-family:'Dancing Script',cursive;
+    font-size:1.5rem;
+    color:#ff4d6d;
+    background:linear-gradient(180deg,#ffffff,#fff0f5);
+    border:none;
+    border-radius:40px;
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
+    box-shadow:
+        0 15px 35px rgba(255,77,109,.35),
+        inset 0 0 0 2px rgba(255,255,255,.9);
+    animation:floatBtn 3s ease-in-out infinite;
+}
+
+/* ลอยเบา ๆ */
+@keyframes floatBtn{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-6px)}
+}
+
+/* แสงวิ่ง */
+.btn-special::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:120%;
+    height:100%;
+    background:linear-gradient(
+        120deg,
+        transparent 30%,
+        rgba(255,255,255,.9),
+        transparent 70%
+    );
+    animation:btnShine 3s infinite;
+}
+
+@keyframes btnShine{
+    0%{left:-120%}
+    60%{left:120%}
+    100%{left:120%}
+}
+
+/* ---------- COVER ---------- */
+.cover-img{
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    object-fit:cover;
+    margin-bottom:20px;
+    box-shadow:0 15px 35px rgba(0,0,0,.2);
+}
+
+/* ---------- CAKE ---------- */
+.cake-container{
+    font-size:90px;
+    cursor:pointer;
+}
+
+.wish-text{
+    font-size:1.4rem;
+    margin-top:20px;
+    opacity:0;
+    transition:1s;
+}
+.wish-text.show{opacity:1}
+
+/* ---------- PAGE 3 CARD ---------- */
+.card{
+    background:linear-gradient(180deg,#ffffff,#fff4f8);
+    max-width:380px;
+    padding:26px 24px 30px;
+    border-radius:24px;
+    box-shadow:0 28px 65px rgba(0,0,0,.22);
+    position:relative;
+    overflow:hidden;
+}
+
+.card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:120%;
+    height:100%;
+    background:linear-gradient(
+        120deg,
+        transparent 30%,
+        rgba(255,255,255,.6),
+        transparent 70%
+    );
+    animation:shine 4s infinite;
+}
+
+@keyframes shine{
+    0%{left:-120%}
+    50%{left:120%}
+    100%{left:120%}
+}
+
+/* ---------- VIDEO ---------- */
+.video-frame{
+    width:100%;
+    height:180px;
+    border-radius:18px;
+    overflow:hidden;
+    margin-bottom:16px;
+    box-shadow:0 12px 30px rgba(0,0,0,.25);
+}
+.video-frame video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* ---------- TEXT ---------- */
+.type{
+    white-space:pre-line;
+    font-size:.95rem;
+    line-height:1.75;
+}
+.glow{
+    animation:glow 1.8s ease-in-out infinite alternate;
+}
+@keyframes glow{
+    from{text-shadow:0 0 6px #ffb3c7}
+    to{text-shadow:0 0 16px #ff6f91}
+}
+
+/* ---------- HEART ---------- */
+.heart{
+    position:fixed;
+    top:-10%;
+    font-size:18px;
+    pointer-events:none;
+    opacity:.85;
+    animation:fall linear forwards;
+}
+@keyframes fall{
+    to{
+        transform:translateY(115vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+audio{display:none}
+</style>
+</head>
+
+<body>
+
+<audio id="bg-music" loop playsinline>
+    <source src="music/Z9 HBD.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGE 1 -->
+<div id="page1" class="page active">
+    <img src="Photo/m1.jpg"
+         class="cover-img"
+         style="transition:transform 1.5s ease, box-shadow 1.5s ease;"
+         onmouseover="
+            this.style.transform='scale(1.08) rotate(1deg)';
+            this.style.boxShadow='0 25px 50px rgba(255,77,109,.55)';
+         "
+         onmouseout="
+            this.style.transform='scale(1) rotate(0deg)';
+            this.style.boxShadow='';
+         "
+         onclick="
+            this.style.transform='scale(1.15)';
+            setTimeout(()=>this.style.transform='scale(1)',350);
+         "
+    >
+
+    <h1 style="
+    font-family:'Dancing Script';
+    font-size:3.2rem;
+    position:relative;
+    line-height:1.2;
+">
+
+    <span style="
+        position:absolute;
+        left:50%;
+        top:50%;
+        transform:translate(-50%,-50%) scale(1.05);
+        opacity:.25;
+        filter:blur(6px);
+        pointer-events:none;
+    ">
+        Happy Birthday, My Love
+    </span>
+
+    <span class="glow"
+        style="
+            display:inline-block;
+            animation:floatBtn 3s ease-in-out infinite;
+        ">
+        🎂 Happy Birthday, My Love 🎀
+    </span>
+
+</h1>
+
+
+    <p>
+        Today is a special day… can you feel it?
+    </p>
+
+<button class="btn-next"
+    style="
+        font-family:'Dancing Script';
+        font-size:1.45rem;
+        letter-spacing:1.2px;
+        transition:.35s ease;
+    "
+    onmouseover="
+        this.style.transform='scale(1.12)';
+        this.style.letterSpacing='3px';
+        this.innerHTML='✨ Let’s Go Together ✨<br><span style=&quot;font-size:.9rem;opacity:.85;&quot;>Tap to start our moment 💕</span>';
+    "
+    onmouseout="
+        this.style.transform='scale(1)';
+        this.style.letterSpacing='1.2px';
+        this.innerHTML='💖 I know… let’s go ✨';
+    "
+    onclick="startExperience()"
+>
+    💖 I know… let’s go ✨
+</button>
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2" class="page">
+    <h2 id="cake-title">อธิษฐานแล้วแตะเค้กเพื่อเป่าเทียนนะ</h2>
+    <div class="cake-container" onclick="blowCake()">🎂</div>
+    <div id="wish-msg" class="wish-text">
+        ขอให้ความรักของเราหวานกว่าเค้กชิ้นนี้อีกนะ ❤️
+    </div>
+    <button id="btn-to-letter" class="btn-special" style="display:none"
+        onclick="nextPage(3); startTyping();">
+        🧸 Click to read 🧸
+    </button>
+</div>
+
+<!-- PAGE 3 -->
+<div id="page3" class="page">
+    <div class="card">
+        <div class="video-frame">
+            <video autoplay loop muted playsinline>
+                <source src="video/VID 1.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <h3>🎀𝒮𝓊𝓀𝓈𝒶𝓃 𝒲𝒶𝓃𝓀𝑒𝓇𝒹🎂💖</h3>
+        <div class="type" id="typeText"></div>
+        <div style="margin-top:12px;font-weight:bold;text-align:right;">
+            ✨ℍ𝕒𝕡𝕡𝕪 𝔹𝕚𝕣𝕥𝕙𝕕𝕒𝕪 𝔽𝕒𝕟🌷🎀
+        </div>
+    </div>
+</div>
+
+<script>
+const music=document.getElementById('bg-music');
+music.volume=0;
+
+function startExperience(){
+    music.play().catch(()=>{});
+    let v=0;
+    const fade=setInterval(()=>{
+        if(v<1){v+=0.05;music.volume=v}
+        else clearInterval(fade);
+    },150);
+    nextPage(2);
+}
+
+function nextPage(n){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('page'+n).classList.add('active');
+}
+
+function blowCake(){
+    document.querySelector('.cake-container').innerHTML='🍰';
+    document.getElementById('wish-msg').classList.add('show');
+    document.getElementById('btn-to-letter').style.display='inline-block';
+    document.getElementById('cake-title').innerText='เป่าเทียนเรียบร้อย!';
+}
+
+const message=
+`สุขสันต์วันเกิดต้าวดื้อ ขอบคุณโลกนี้จริงๆ
+ที่เหวี่ยงเด็กดื้อมาให้เจอเค้านะ วันเกิดปีนี้เค้า
+ไม่ได้อยากขออะไรให้เธอมากมายไปกว่าการให้เธอ
+มีความสุขในทุกๆ วันอยากให้เธอรู้ว่า ไม่ว่าทางข้างหน้า
+
+จะเป็นยังไง จะเจอเรื่องดีหรือเรื่องร้ายแค่
+ไหน หันมาจะเจอเค้ายืนอยู่ข้างๆ เสมอ
+ขอบคุณที่เป็นเซฟโซนที่ดีที่สุด เป็นกำลังใจ
+ที่สำคัญที่สุดในชีวิตเค้านะ ขอให้ปีนี้เป็นปีที่ใจดี
+กับเธอเหมือนที่เธอใจดีกับเค้า 
+รักต้าวดื้อที่สุดในโลกเลย💕`;
+
+let index=0;
+function startTyping(){
+    const el=document.getElementById('typeText');
+    el.innerHTML='';
+    index=0;
+    const typing=setInterval(()=>{
+        el.innerHTML+=message[index];
+        index++;
+        if(index>=message.length){
+            clearInterval(typing);
+            el.classList.add('glow');
+        }
+    },45);
+}
+
+function createHeart(){
+    const heart=document.createElement('div');
+    heart.className='heart';
+    heart.innerHTML=['💖','💗','💕','✨'][Math.floor(Math.random()*4)];
+    heart.style.left=Math.random()*100+'vw';
+    heart.style.fontSize=(Math.random()*12+14)+'px';
+    heart.style.animationDuration=(Math.random()*4+4)+'s';
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),8000);
+}
+setInterval(createHeart,320);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+.cake{
+    width:280px;          /* ใหญ่ขึ้น */
+    height:280px;
+    max-width:85vw;       /* พอดีมือถือทุกจอ */
+    background:url('cake.png') center/contain no-repeat;
+    cursor:pointer;
+    animation:float 3s ease-in-out infinite;
+    filter:drop-shadow(0 25px 35px rgba(0,0,0,.35));
+}
